@@ -6,14 +6,13 @@ source ../ia.sh
 # Tell poetry to use the specific Python version
 poetry env use $PYTHON
 
-# Check if .venv exists, if not run poetry install
-if [ ! -d ".venv" ]; then
-    echo "Virtual environment not found. Running poetry install..."
-    poetry install
-fi
+# Set poetry config
+poetry config virtualenvs.in-project true
+
+# poetry install
+poetry install
+echo "Virtual environment installed"
 
 # Activate the virtual environment
 source .venv/bin/activate
-
 echo "Virtual environment activated. Python: $(which python)"
-source .venv/bin/activate
