@@ -1,17 +1,17 @@
 from search_agent import SearchAgent
 from priority_queue import PriorityQueue
+from typing import Callable
 
 
 class AStarAgent(SearchAgent):
 
-    def __init__(self, env, initial_state, end_state, model):
+    def __init__(self, env, initial_state, end_state, model, heuristic_func: Callable[[object, object], int]=None):
         super().__init__(env, initial_state, end_state, model)
         self.action_list = []
         self.heuristics = {}
-        self._calculate_heuristics()
-
-    def _calculate_heuristics(self):
-        raise NotImplementedError
+        if heuristic_func is None:
+            heuristic_func = lambda state, goal: 0
+        self.h = heuristic_func
 
 
     def next_action(self):
